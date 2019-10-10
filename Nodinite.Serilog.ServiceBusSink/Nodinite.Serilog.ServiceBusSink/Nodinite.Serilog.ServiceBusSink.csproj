@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageIconUrl>https://github.com/Nodinite/Nodinite.Serilog.ServiceBusSink/blob/master/artifacts/nodinite-favicon-192x192.png?raw=true</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/Nodinite/Nodinite.Serilog.ServiceBusSink</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Nodinite/Nodinite.Serilog.ServiceBusSink</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/Nodinite/Nodinite.Serilog.ServiceBusSink/blob/master/LICENSE</PackageLicenseUrl>
+    <Copyright>Nodinite</Copyright>
+    <Description>Serilog Sink that pushes your log events to a Service Bus Queue.</Description>
+    <Company>Nodinite (https://nodinite.com/)</Company>
+    <Authors>Nodinite</Authors>
+    <PackageTags>Nodinite</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.ServiceBus" Version="4.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Nodinite.Serilog.Models" Version="1.0.1" />
+    <PackageReference Include="Serilog" Version="2.7.1" />
+  </ItemGroup>
+
+</Project>
