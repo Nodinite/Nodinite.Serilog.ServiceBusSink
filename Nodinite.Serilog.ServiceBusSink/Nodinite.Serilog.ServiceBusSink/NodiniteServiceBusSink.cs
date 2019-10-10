@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace Nodinite.Serilog.ApiSink
+namespace Nodinite.Serilog.ServiceBusSink
 {
     public class NodiniteServiceBusSink : ILogEventSink, INodiniteSink
     {

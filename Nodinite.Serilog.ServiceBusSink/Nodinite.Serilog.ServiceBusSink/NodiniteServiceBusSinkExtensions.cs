@@ -4,11 +4,11 @@ using Serilog.Configuration;
 using Serilog.Events;
 using System;
 
-namespace Nodinite.Serilog.ApiSink
+namespace Nodinite.Serilog.ServiceBusSink
 {
     public static class NodiniteServiceBusSinkExtensions
     {
-        public static LoggerConfiguration NodiniteApiSink(
+        public static LoggerConfiguration NodiniteServiceBusSink(
                   this LoggerSinkConfiguration loggerConfiguration,
                   string ConnectionString, 
                   string QueueName,

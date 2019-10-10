@@ -2,7 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Serilog;
 using Serilog.Core;
 using System;
-using Nodinite.Serilog.ApiSink;
+using Nodinite.Serilog.ServiceBusSink;
 using Nodinite.Serilog.Models;
 
 namespace Nodinite.Serilog.ServiceBusSink.Tests
@@ -47,7 +47,7 @@ namespace Nodinite.Serilog.ServiceBusSink.Tests
             };
 
             Logger log = new LoggerConfiguration()
-                .WriteTo.NodiniteApiSink(connectionString, queueName, settings)
+                .WriteTo.NodiniteServiceBusSink(connectionString, queueName, settings)
                 .CreateLogger();
         }
 
@@ -73,7 +73,7 @@ namespace Nodinite.Serilog.ServiceBusSink.Tests
             };
 
             ILogger log = new LoggerConfiguration()
-                .WriteTo.NodiniteApiSink(connectionString, queueName, settings)
+                .WriteTo.NodiniteServiceBusSink(connectionString, queueName, settings)
                 .CreateLogger()
                 .ForContext("CorrelationId", Guid.NewGuid())
                 .ForContext("CustomerId", 12);
