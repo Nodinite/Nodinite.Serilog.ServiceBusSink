@@ -13,7 +13,7 @@
     <Company>Nodinite (https://nodinite.com/)</Company>
     <Authors>Nodinite</Authors>
     <PackageTags>Nodinite</PackageTags>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <PackageReleaseNotes>Fixed bug where name of sink was apisink instead of servicebussink</PackageReleaseNotes>
   </PropertyGroup>
 
