@@ -56,8 +56,8 @@ namespace Nodinite.Serilog.ServiceBusSink.Tests
         [TestMethod]
         public void LogContextProperties()
         {
-            var connectionString = "Endpoint=sb://nodinite-demo-dev2.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=gSDIojRU9tCL6/uPaci8XBEjBmjqqROW4TMczSlpLtE=";
-            var queueName = "nodinitelogeventsdemo";
+            var connectionString = "";
+            var queueName = "";
 
             var settings = new NodiniteLogEventSettings()
             {
