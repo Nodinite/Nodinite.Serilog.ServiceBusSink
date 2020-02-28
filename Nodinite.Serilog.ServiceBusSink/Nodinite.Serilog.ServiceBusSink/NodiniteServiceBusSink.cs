@@ -16,6 +16,7 @@ namespace Nodinite.Serilog.ServiceBusSink
         private readonly string _connectionString;
         private readonly string _queueName;
         private readonly NodiniteLogEventSettings _settings;
+        private readonly Guid _localInterchangeId;
 
         static IQueueClient queueClient;
 
@@ -25,6 +26,7 @@ namespace Nodinite.Serilog.ServiceBusSink
             _queueName = queueName;
             _settings = settings;
             _formatProvider = formatProvider;
+            _localInterchangeId = Guid.NewGuid();
 
             // validate settings
             if (!_settings.LogAgentValueId.HasValue)
@@ -42,6 +44,9 @@ namespace Nodinite.Serilog.ServiceBusSink
 
         public void LogMessage(NodiniteLogEvent logEvent)
         {
+            logEvent.LocalInterchangeId = _localInterchangeId;
+            logEvent.ServiceInstanceActivityId = Guid.NewGuid();
+
             queueClient = new QueueClient(_connectionString, _queueName);
 
             var message = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(logEvent)));

@@ -4,6 +4,8 @@ using Serilog.Core;
 using System;
 using Nodinite.Serilog.ServiceBusSink;
 using Nodinite.Serilog.Models;
+using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace Nodinite.Serilog.ServiceBusSink.Tests
 {
@@ -14,15 +16,15 @@ namespace Nodinite.Serilog.ServiceBusSink.Tests
         public void ReadSettingsFromAppSettingsTest()
         {
             // todo: implement moq
-            //var configuration = new ConfigurationBuilder()
-            //    .AddJsonFile("appsettings.json")
-            //    .Build();
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
 
-            //Logger log = new LoggerConfiguration()
-            //    .ReadFrom.Configuration(configuration)
-            //    .CreateLogger();
+            Logger log = new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
 
-            //log.Information("Hello World");
+            log.Information("Hello World");
         }
 
         [TestMethod]
@@ -54,19 +56,18 @@ namespace Nodinite.Serilog.ServiceBusSink.Tests
         [TestMethod]
         public void LogContextProperties()
         {
-            var connectionString = "";
-            var queueName = "";
+            var connectionString = "Endpoint=sb://nodinite-demo-dev2.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=gSDIojRU9tCL6/uPaci8XBEjBmjqqROW4TMczSlpLtE=";
+            var queueName = "nodinitelogeventsdemo";
 
             var settings = new NodiniteLogEventSettings()
             {
                 LogAgentValueId = 503,
                 EndPointDirection = 0,
                 EndPointTypeId = 0,
-                EndPointUri = "Nodinite.Serilog.Sink.Tests.Serilog",
-                EndPointName = "Nodinite.Serilog.Sink.Tests",
-                OriginalMessageTypeName = "Serilog.LogEvent",
+                EndPointUri = "Nodinite.Serilog.ServiceBusSink.Tests.Serilog",
+                EndPointName = "Nodinite.Serilog.ServiceBusSink.Tests",
                 ProcessingUser = "NODINITE",
-                ProcessName = "Nodinite.Serilog.Sink.Tests",
+                ProcessName = "Nodinite.Serilog.ServiceBusSink.Tests",
                 ProcessingMachineName = "NODINITE-DEV",
                 ProcessingModuleName = "DOTNETCORE.TESTS",
                 ProcessingModuleType = "DOTNETCORE.TESTPROJECT"
@@ -75,10 +76,16 @@ namespace Nodinite.Serilog.ServiceBusSink.Tests
             ILogger log = new LoggerConfiguration()
                 .WriteTo.NodiniteServiceBusSink(connectionString, queueName, settings)
                 .CreateLogger()
-                .ForContext("CorrelationId", Guid.NewGuid())
-                .ForContext("CustomerId", 12);
+                .ForContext("ApplicationInterchangeId", $"CustomId-{Guid.NewGuid().ToString()}")
+                .ForContext("CustomerId", 12)
+                .ForContext("Body", JsonConvert.SerializeObject(new TestMessage() { Id = 1 }))
+                .ForContext("OriginalMessageType", "TestMessage#1.0");
 
             log.Information($"Customer '12' imported");
         }
+    }
+
+    public class TestMessage {
+        public int Id { get; set; }
     }
 }
