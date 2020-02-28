@@ -78,7 +78,7 @@ namespace Nodinite.Serilog.ServiceBusSink.Tests
                 .CreateLogger()
                 .ForContext("ApplicationInterchangeId", $"CustomId-{Guid.NewGuid().ToString()}")
                 .ForContext("CustomerId", 12)
-                .ForContext("Body", JsonConvert.SerializeObject(new TestMessage() { Id = 1 }))
+                .ForContext("Body", JsonConvert.SerializeObject(new { Id = 1 }))
                 .ForContext("OriginalMessageType", "TestMessage#1.0");
 
             log.Information($"Customer '12' imported");

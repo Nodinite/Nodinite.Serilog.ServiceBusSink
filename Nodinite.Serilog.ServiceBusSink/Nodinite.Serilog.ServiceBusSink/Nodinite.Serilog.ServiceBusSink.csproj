@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageIconUrl>https://github.com/Nodinite/Nodinite.Serilog.ServiceBusSink/blob/master/artifacts/nodinite-favicon-192x192.png?raw=true</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/Nodinite/Nodinite.Serilog.ApiSink/master/artifacts/nodinite-favicon-192x192.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/Nodinite/Nodinite.Serilog.ServiceBusSink</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Nodinite/Nodinite.Serilog.ServiceBusSink</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/Nodinite/Nodinite.Serilog.ServiceBusSink/blob/master/LICENSE</PackageLicenseUrl>
@@ -15,6 +15,8 @@
     <PackageTags>Nodinite</PackageTags>
     <Version>1.0.4</Version>
     <PackageReleaseNotes>Fixed bug where name of sink was apisink instead of servicebussink</PackageReleaseNotes>
+    <Product>Nodinite.Serilog.ServiceBusSink</Product>
+    <PackageId>Nodinite.Serilog.ServiceBusSink</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

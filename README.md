@@ -9,8 +9,6 @@ A [Serilog](https://www.nuget.org/packages/Serilog/2.7.2-dev-01033) sink that wr
 
 This project is built with .NET Standard 2.0.
 
-![nodinite.serilog.sink.core.event.logging](artifacts/nodinite.serilog.sink.core.event.logging.png)
-
 ## Get Started
 
 ### Install Nodinite.Serilog.ServiceBusSink Nuget Package
@@ -48,7 +46,9 @@ Besides [Serilog](https://www.nuget.org/packages/serilog/), the following nuget 
 Using the following code below you can start logging events to [**Nodinite**](https://nodinite.com).
 
 ```csharp
-var nodiniteApiUrl = "{Your Nodinite Log API Url";
+var connectionString = "{Your ServiceBus Connection String";
+var queueName = "{Your ServiceBus Queue Name}";
+
 var settings = new NodiniteLogEventSettings()
 {
     LogAgentValueId = 503,
@@ -56,7 +56,6 @@ var settings = new NodiniteLogEventSettings()
     EndPointTypeId = 0,
     EndPointUri = "Nodinite.Serilog.ServiceBusSink.Tests.Serilog",
     EndPointName = "Nodinite.Serilog.ServiceBusSink.Tests",
-    OriginalMessageTypeName = "Serilog.LogEvent",
     ProcessingUser = "NODINITE",
     ProcessName = "Nodinite.Serilog.ServiceBusSink.Tests",
     ProcessingMachineName = "NODINITE-DEV",
@@ -64,9 +63,13 @@ var settings = new NodiniteLogEventSettings()
     ProcessingModuleType = "DOTNETCORE.TESTPROJECT"
 };
 
-Logger log = new LoggerConfiguration()
-    .WriteTo.NodiniteServiceBusSink(nodiniteApiUrl, settings)
-    .CreateLogger();
+ILogger log = new LoggerConfiguration()
+    .WriteTo.NodiniteServiceBusSink(connectionString, queueName, settings)
+    .CreateLogger()
+    .ForContext("ApplicationInterchangeId", $"CustomId-{Guid.NewGuid().ToString()}")
+    .ForContext("CustomerId", 12)
+    .ForContext("Body", JsonConvert.SerializeObject(new { Id = 1 }))
+    .ForContext("OriginalMessageType", "TestMessage#1.0");
 ```
 
 #### Using Appsettings.json (Preferred)
@@ -100,7 +103,8 @@ And putting the following into your appsettings.json:
       {
         "Name": "NodiniteServiceBusSink",
         "Args": {
-          "NodiniteApiUrl": "",
+          "ConnectionString": "",
+          "QueueName":  "",
           "Settings": {
             "LogAgentValueId": 503,
             "EndPointName": "Nodinite.Serilog.ServiceBusSink.Tests",
@@ -125,7 +129,7 @@ And putting the following into your appsettings.json:
 
 ```csharp
 ILogger log = new LoggerConfiguration()
-    .WriteTo.NodiniteServiceBusSink(nodiniteApiUrl, settings)
+    .WriteTo.NodiniteServiceBusSink(connectionString, queueName, settings)
     .CreateLogger()
     .ForContext("CorrelationId", Guid.NewGuid())
     .ForContext("CustomerId", 12);
