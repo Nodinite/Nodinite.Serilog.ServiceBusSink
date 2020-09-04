@@ -52,6 +52,7 @@ namespace Nodinite.Serilog.ServiceBusSink
             var message = new Message(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(logEvent)));
 
             queueClient.SendAsync(message).Wait();
+            queueClient.CloseAsync().Wait();
         }
     }
 }
