@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2016
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nodinite.Serilog.ServiceBusSink", "Nodinite.Serilog.ServiceBusSink\Nodinite.Serilog.ServiceBusSink.csproj", "{1A3E7241-E76F-4EB7-A4A5-8D815F885AFE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nodinite.Serilog.ServiceBusSink", "Nodinite.Serilog.ServiceBusSink.Tests\Nodinite.Serilog.ServiceBusSink.csproj", "{E3867B7A-F9C3-45B2-A91C-0255A49AB9D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nodinite.Serilog.ServiceBusSink.Test", "Nodinite.Serilog.ServiceBusSink.Tests\Nodinite.Serilog.ServiceBusSink.Test.csproj", "{E3867B7A-F9C3-45B2-A91C-0255A49AB9D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
